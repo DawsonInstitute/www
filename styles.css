@@ -1,0 +1,327 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffd700;
+}
+
+/* Main content */
+main {
+    margin-top: 120px;
+}
+
+section {
+    padding: 4rem 0;
+    margin-bottom: 2rem;
+}
+
+.hero {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    margin: 0 20px 2rem 20px;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Mission Section */
+.mission-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin: 0 20px 2rem 20px;
+    color: #333;
+}
+
+.mission-section h2 {
+    color: #1e3c72;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.mission-intro {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #555;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Roadmap Styles */
+.roadmap-timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.roadmap-item {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #2a5298;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.roadmap-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.roadmap-item.status-in-progress {
+    border-left-color: #28a745;
+}
+
+.roadmap-item.status-planned {
+    border-left-color: #ffc107;
+}
+
+.roadmap-item.status-conceptual {
+    border-left-color: #17a2b8;
+}
+
+.roadmap-item.status-visionary {
+    border-left-color: #6f42c1;
+}
+
+.roadmap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.roadmap-phase {
+    background: #1e3c72;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.roadmap-timeframe {
+    color: #666;
+    font-weight: 500;
+}
+
+.roadmap-title {
+    color: #1e3c72;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.roadmap-description {
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.roadmap-goals {
+    margin-top: 1rem;
+}
+
+.roadmap-goals h4 {
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+}
+
+.roadmap-goals ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.roadmap-goals li {
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    border-left: 3px solid #2a5298;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-in-progress {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-planned {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-conceptual {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-visionary {
+    background: #e2d9f3;
+    color: #4a154b;
+}
+
+.loading {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+}
+
+/* Research Section */
+.research-section {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin: 0 20px 2rem 20px;
+    color: #333;
+}
+
+.research-section h2 {
+    color: #1e3c72;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.research-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.research-item:hover {
+    transform: translateY(-5px);
+}
+
+.research-item h3 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+/* Contact Section */
+.contact-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    margin: 0 20px 2rem 20px;
+}
+
+.contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ffd700;
+}
+
+/* Footer */
+footer {
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    backdrop-filter: blur(10px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .roadmap-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .research-grid {
+        grid-template-columns: 1fr;
+    }
+}
