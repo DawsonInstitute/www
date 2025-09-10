@@ -172,3 +172,62 @@ window.addEventListener('scroll', function() {
         header.style.background = 'rgba(255, 255, 255, 0.1)';
     }
 });
+
+// Load mission statement and roadmap on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  const missionUrl = 'mission.ndjson';
+  const missionEl = document.getElementById('mission-intro');
+  const roadmapContainer = document.getElementById('roadmap-container');
+
+  fetch(missionUrl).then(r => {
+    if (!r.ok) throw new Error('Network response was not ok');
+    return r.text();
+  }).then(text => {
+    const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    const milestones = [];
+    let missionStatement = '';
+
+    for (const line of lines) {
+      try {
+        const obj = JSON.parse(line);
+        if (obj.type === 'mission' && obj.statement) missionStatement = obj.statement;
+        else if (obj.type === 'milestone') milestones.push(obj);
+      } catch (e) {
+        console.warn('Skipping invalid NDJSON line', e);
+      }
+    }
+
+    if (missionStatement) missionEl.textContent = missionStatement;
+    else missionEl.textContent = 'Mission statement unavailable.';
+
+    // Render roadmap
+    roadmapContainer.innerHTML = '';
+    if (milestones.length === 0) {
+      roadmapContainer.innerHTML = '<p class="loading">No roadmap items found.</p>';
+      return;
+    }
+
+    const list = document.createElement('div');
+    list.className = 'roadmap-grid';
+    milestones.sort((a,b)=> (a.year||0) - (b.year||0));
+    for (const m of milestones) {
+      const card = document.createElement('div');
+      card.className = 'roadmap-item';
+      card.innerHTML = `<h3>${m.year} — ${escapeHtml(m.title||'Untitled')}</h3>
+                        <p>${escapeHtml(m.description||'')}</p>`;
+      list.appendChild(card);
+    }
+    roadmapContainer.appendChild(list);
+  }).catch(err => {
+    missionEl.textContent = 'Failed to load mission statement.';
+    roadmapContainer.innerHTML = `<p class="loading">Failed to load roadmap: ${escapeHtml(err.message)}</p>`;
+    console.error(err);
+  });
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+});
