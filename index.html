@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dawson Institute for Advanced Physics conducts pioneering research in quantum field theory, computational physics, and exotic materials for breakthrough technologies.">
+    <meta name="keywords" content="advanced physics, quantum field theory, computational physics, plasma reactors, exotic materials, Dawson Institute">
+    <meta property="og:title" content="Dawson Institute for Advanced Physics">
+    <meta property="og:description" content="Pioneering research in quantum field theory, computational physics, and exotic materials.">
+    <meta property="og:image" content="https://www.dawsoninstitute.org/img/logo.png">
+    <meta property="og:url" content="https://www.dawsoninstitute.org">
+    <meta property="og:type" content="website">
     <title>Dawson Institute for Advanced Physics</title>
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -44,15 +51,15 @@
     <header>
         <div class="container">
             <div class="brand">
-                <img id="site-logo" src="img/logo.png" alt="Dawson Institute logo" loading="lazy">
+                <img id="site-logo" src="img/logo.png" alt="Dawson Institute for Advanced Physics logo" loading="lazy">
                 <h1>Dawson Institute for Advanced Physics</h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#mission">Mission</a></li>
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home" aria-label="Go to Home page">Home</a></li>
+                    <li><a href="#mission" aria-label="Learn about our Mission">Mission</a></li>
+                    <li><a href="#research" aria-label="Explore our Research areas">Research</a></li>
+                    <li><a href="#contact"aria-label="Contact the Dawson Institute">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -89,6 +96,10 @@
                         <h3>Materials Science</h3>
                         <p>Creating exotic materials capable of withstanding extreme conditions.</p>
                     </div>
+                    <div class="research-item">
+                        <h3>Explore Our Work</h3>
+                        <p>View our open-source projects on <a href="https://github.com/DawsonInstitute/" target="_blank" rel="noopener">GitHub</a>.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -98,7 +109,10 @@
                 <h2>Contact Us</h2>
                 <p>Interested in our research? Get in touch.</p>
                 <div class="contact-info">
-                    <p>Email: info@dawsoninstitute.org</p>
+                    <!-- obfuscated email (stored reversed in data-e) -->                    
+                    <p>Email: <span id="email-contact" data-e="gro.etutitsninoswad@ofni" aria-hidden="true">[email protected]</span></p>
+                    <!-- CTA without raw mailto; script will set href and handle click -->
+                    <a id="contact-button" class="cta-button" href="#" data-e="gro.etutitsninoswad@ofni">Get in Touch</a>
                 </div>
             </div>
         </section>
@@ -109,5 +123,53 @@
             <p>&copy; 2025 Dawson Institute for Advanced Physics. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- unobtrusive script to reconstruct obfuscated email and reliably open mail client -->
+    <script>
+      (function(){
+        function unobfuscate(rev){ return String(rev || '').split('').reverse().join(''); }
+
+        function revealAndOpen(rev, openMail){
+          var email = unobfuscate(rev);
+          var el = document.getElementById('email-contact');
+          var btn = document.getElementById('contact-button');
+          if (el) {
+            el.textContent = email;
+            el.setAttribute('aria-label', 'Email ' + email);
+            el.removeAttribute('aria-hidden');
+          }
+          if (btn) {
+            btn.setAttribute('aria-label', 'Email ' + email);
+            // set href for progressive enhancement
+            try { btn.href = 'mailto:' + email; } catch(e) {}
+            if (openMail) {
+              // ensure mail client opens even if href isn't parsed yet
+              window.location.href = 'mailto:' + email;
+            }
+          }
+        }
+
+        // On DOM ready, reveal email (no automatic mail open)
+        document.addEventListener('DOMContentLoaded', function(){
+          var el = document.getElementById('email-contact');
+          var btn = document.getElementById('contact-button');
+          var rev = (el && el.getAttribute('data-e')) || (btn && btn.getAttribute('data-e')) || '';
+          if (!rev) return;
+          revealAndOpen(rev, false);
+        });
+
+        // Fallback: handle clicks even if DOMContentLoaded hasn't completed or JS runs late
+        document.addEventListener('click', function(e){
+          var t = e.target;
+          if (!t) return;
+          var btn = t.closest && t.closest('#contact-button') || (t.id === 'contact-button' && t);
+          if (!btn) return;
+          e.preventDefault();
+          var rev = btn.getAttribute('data-e') || (document.getElementById('email-contact') && document.getElementById('email-contact').getAttribute('data-e')) || '';
+          if (!rev) return;
+          revealAndOpen(rev, true);
+        }, true);
+      })();
+    </script>
 </body>
 </html>
