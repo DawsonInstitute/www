@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="styles.css">
     <style>
       /* Force readable colors regardless of existing stylesheet */
+     :root{ --header-height: 0px; } /* updated dynamically by script */
+     /* ensure anchor jumps offset the header */
+     section { scroll-margin-top: calc(var(--header-height) + 8px); }
+
+    /* tiny extra space so the home section top isn't visually cut off by the header */
+    #home { padding-top: 12px !important; }
+
       body {
         color: #111 !important;
         background: #fafafa !important;
@@ -106,6 +113,18 @@
           } catch(e){}
         }
 
+        // set CSS var --header-height and also push <main> down so header never overlaps content
+        function updateHeaderHeight() {
+          try {
+            var hdr = container.querySelector('header') || document.querySelector('header');
+            var main = document.querySelector('main');
+            var h = hdr ? (hdr.getBoundingClientRect().height || hdr.offsetHeight || 0) : 0;
+            var gap = 8; // keeps a small visual gap so rounded corners remain visible
+            document.documentElement.style.setProperty('--header-height', Math.ceil(h) + 'px');
+            if (main) main.style.marginTop = (Math.ceil(h) + gap) + 'px';
+          } catch (e) { /* noop */ }
+        }
+
         fetch(src).then(function(r){
           if (!r.ok) throw new Error('fetch failed');
           return r.text();
@@ -113,12 +132,22 @@
           container.innerHTML = html;
           container.removeAttribute('aria-hidden');
           markCurrent(container);
+          updateHeaderHeight();
         }).catch(function(){
           // fallback to inline header so header is visible when fetch isn't allowed
           container.innerHTML = fallbackHTML;
           container.removeAttribute('aria-hidden');
           markCurrent(container);
+          updateHeaderHeight();
         });
+
+        // update header height on resize (throttled)
+        var resizeTimer;
+        window.addEventListener('resize', function(){
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(updateHeaderHeight, 120);
+        });
+
       })();
     </script>
 

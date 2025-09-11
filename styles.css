@@ -75,6 +75,9 @@ section {
     color: white;
     border-radius: 15px;
     margin: 0 20px 2rem 20px;
+    margin-top: 0 !important;
+    position: relative;
+    z-index: 0;
 }
 
 .hero h2 {
@@ -89,6 +92,15 @@ section {
 .hero p {
     font-size: 1.2rem;
     opacity: 0.9;
+}
+
+/* Ensure all main sections (including hero) account for the header height set by --header-height */
+section,
+.hero,
+.mission-section,
+.research-section,
+.contact-section {
+  scroll-margin-top: calc(var(--header-height, 0px) + 8px);
 }
 
 /* Mission Section */
