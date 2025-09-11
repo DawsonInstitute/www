@@ -59,22 +59,68 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="brand">
+    <!-- shared header will be loaded here -->
+    <div id="site-header" data-src="header.html" aria-hidden="true"></div>
+
+    <script>
+      (function(){
+        var container = document.getElementById('site-header');
+        if (!container) return;
+        var src = container.getAttribute('data-src') || 'header.html';
+
+        var fallbackHTML = `
+          <header>
+            <div class="container">
+              <div class="brand">
                 <img id="site-logo" src="img/logo.png" alt="Dawson Institute for Advanced Physics logo" loading="lazy">
                 <h1>Dawson Institute for Advanced Physics</h1>
-            </div>
-            <nav>
+              </div>
+              <nav>
                 <ul>
-                    <li><a href="#home" aria-label="Go to Home page">Home</a></li>
-                    <li><a href="#mission" aria-label="Learn about our Mission">Mission</a></li>
-                    <li><a href="#research" aria-label="Explore our Research areas">Research</a></li>
-                    <li><a href="#contact"aria-label="Contact the Dawson Institute">Contact</a></li>
+                  <li><a href="index.html" aria-label="Go to Home page">Home</a></li>
+                  <li><a href="index.html#mission" aria-label="Learn about our Mission">Mission</a></li>
+                  <li><a href="index.html#research" aria-label="Explore our Research areas">Research</a></li>
+                  <li><a href="index.html#contact" aria-label="Contact the Dawson Institute">Contact</a></li>
+                  <li><a href="membership.html" aria-label="Membership and Join form">Membership / Join</a></li>
                 </ul>
-            </nav>
-        </div>
-    </header>
+              </nav>
+            </div>
+          </header>`;
+
+        function markCurrent(containerBase){
+          try {
+            var current = (location.pathname.split('/').pop() || 'index.html');
+            var anchors = containerBase.querySelectorAll('nav a[href]');
+            anchors.forEach(function(a){
+              var href = a.getAttribute('href');
+              if (!href) return;
+              // mark index.html as current when on root or index
+              if (current === '' && (href === 'index.html' || href === './' || href === '/')) {
+                a.setAttribute('aria-current','page');
+              } else if (href === current) {
+                a.setAttribute('aria-current','page');
+              } else {
+                a.removeAttribute('aria-current');
+              }
+            });
+          } catch(e){}
+        }
+
+        fetch(src).then(function(r){
+          if (!r.ok) throw new Error('fetch failed');
+          return r.text();
+        }).then(function(html){
+          container.innerHTML = html;
+          container.removeAttribute('aria-hidden');
+          markCurrent(container);
+        }).catch(function(){
+          // fallback to inline header so header is visible when fetch isn't allowed
+          container.innerHTML = fallbackHTML;
+          container.removeAttribute('aria-hidden');
+          markCurrent(container);
+        });
+      })();
+    </script>
 
     <main>
         <section id="home" class="hero">

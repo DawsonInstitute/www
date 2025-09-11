@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Membership / Join — Dawson Institute for Advanced Physics</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Join the Dawson Institute — membership interest form.">
+  <style>
+    /* small page-specific tweaks to keep the form comfortable on the page */
+    .form-wrap{ max-width:1100px; margin:1.25rem auto; padding:0 1rem; }
+    .form-intro{ margin-bottom:1rem; color:#222; }
+    iframe.zf{ width:100%; border:0; min-height:520px; }
+
+    /* force dark readable text on this page only */
+    .form-wrap, .form-wrap * {
+      color: #111 !important;
+      background-color: transparent !important;
+    }
+    header .brand h1,
+    .form-wrap h2,
+    .form-intro { color: #111 !important; }
+    nav a { color: #0b6efd !important; }
+
+    /* header-specific sizing so injected header matches index.html */
+    /* (only affects membership.html) */
+    header .brand { display:flex; align-items:center; gap:12px; }
+    header #site-logo { height:96px; width:auto; display:block; }
+    header .brand h1 { font-size:1.5rem; margin:0; }
+  </style>
+</head>
+<body>
+  <!-- placeholder for shared header -->
+  <div id="site-header" data-src="header.html" aria-hidden="true"></div>
+
+  <script>
+    (function(){
+      var container = document.getElementById('site-header');
+      if (!container) return;
+      var src = container.getAttribute('data-src') || 'header.html';
+
+      var fallbackHTML = '<header><div class="container"><div class="brand"><img id="site-logo" src="img/logo.png" alt="Dawson Institute for Advanced Physics logo" loading="lazy"><h1>Dawson Institute for Advanced Physics</h1></div><nav><ul><li><a href="index.html">Home</a></li><li><a href="index.html#mission">Mission</a></li><li><a href="index.html#research">Research</a></li><li><a href="index.html#contact">Contact</a></li><li><a href="membership.html">Membership / Join</a></li></ul></nav></div></header>';
+
+      function markCurrent(containerBase){
+        try {
+          var current = (location.pathname.split('/').pop() || 'index.html');
+          var anchors = containerBase.querySelectorAll('nav a[href]');
+          anchors.forEach(function(a){
+            var href = a.getAttribute('href');
+            if (!href) return;
+            if (href === current || (current === '' && href.indexOf('index') !== -1)) {
+              a.setAttribute('aria-current','page');
+            } else {
+              a.removeAttribute('aria-current');
+            }
+          });
+        } catch(e){}
+      }
+
+      fetch(src).then(function(r){
+        if (!r.ok) throw new Error('fetch failed');
+        return r.text();
+      }).then(function(html){
+        container.innerHTML = html;
+        container.removeAttribute('aria-hidden');
+        markCurrent(container);
+      }).catch(function(){
+        // fallback so header is visible even when fetch is blocked (e.g., file://)
+        container.innerHTML = fallbackHTML;
+        container.removeAttribute('aria-hidden');
+        try { markCurrent(container); } catch(e){}
+      });
+    })();
+  </script>
+
+  <main id="main">
+    <section class="form-wrap">
+      <h2>Membership / Join</h2>
+      <p class="form-intro">If you're interested in joining or supporting the Dawson Institute, please fill out the short interest form below.</p>
+
+      <!-- embedded Zoho form -->
+      <iframe class="zf" aria-label="Dawson Institute – Membership Interest Form" frameborder="0" allow="geolocation;" style="height:500px;width:99%;border:none;" src="https://forms.zohopublic.com/DawsonInstitute/form/DawsonInstituteMembershipInterestForm/formperma/0VYGl_B-9IrYqIxHQdBhLCjK_XbheJJCfCfK2V0Vgko"></iframe>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Dawson Institute for Advanced Physics. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+      <h2>Membership / Join</h2>
+      <p class="form-intro">If you're interested in joining or supporting the Dawson Institute, please fill out the short interest form below.</p>
+
+      <!-- embedded Zoho form (provided) -->
+      <iframe class="zf" aria-label="Dawson Institute – Membership Interest Form" frameborder="0" allow="geolocation;" style="height:500px;width:99%;border:none;" src="https://forms.zohopublic.com/DawsonInstitute/form/DawsonInstituteMembershipInterestForm/formperma/0VYGl_B-9IrYqIxHQdBhLCjK_XbheJJCfCfK2V0Vgko"></iframe>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Dawson Institute for Advanced Physics. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
