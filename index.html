@@ -24,6 +24,17 @@
       .brand h1 { color: inherit; }
       .loading { color: #666 !important; }
 
+      /* new: explicit style for the hero heading to ensure a non-yellow foreground */
+      /* enforce a readable accent for the specific hero H2 (not yellow) */
+      h2.hero-title,
+      h2.hero-title::before,
+      h2.hero-title::after,
+      h2.hero-title * {
+        color: #0b6efd !important;               /* clear blue accent */
+        -webkit-text-fill-color: #0b6efd !important;
+        fill: #0b6efd !important;
+      }
+
       /* changed: make logo larger and improve header typography/layout */
       .brand{ display:flex; align-items:center; gap:12px; }
       #site-logo{
@@ -68,7 +79,7 @@
     <main>
         <section id="home" class="hero">
             <div class="container">
-                <h2>Advancing the Frontiers of Physics</h2>
+                <h2 class="hero-title">Advancing the Frontiers of Physics</h2>
                 <p>Pioneering research in advanced physics with a focus on breakthrough technologies.</p>
             </div>
         </section>
