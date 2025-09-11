@@ -5,12 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dawson Institute for Advanced Physics</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+      /* Force readable colors regardless of existing stylesheet */
+      body {
+        color: #111 !important;
+        background: #fafafa !important;
+      }
+      h1,h2,h3 { color: #111 !important; }
+      p, li, a { color: #111 !important; }
+      nav a { color: #0b6efd !important; text-decoration: none; }
+      .brand h1 { color: inherit; }
+      .loading { color: #666 !important; }
+
+      /* changed: make logo larger and improve header typography/layout */
+      .brand{ display:flex; align-items:center; gap:12px; }
+      #site-logo{
+        height:96px;
+        width:auto;
+        display:block;
+      }
+      .brand h1{
+        font-size:1.5rem;
+        margin:0;
+      }
+      nav a{
+        font-size:0.95rem;
+        font-weight:600;
+      }
+
+      /* added: top bar background color and subtle separation */
+      header{
+        background: #fcfcfc;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+      }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <div class="brand">
-                <img id="site-logo" src="/img/logo" alt="Dawson Institute logo" loading="lazy" style="height:48px;margin-right:12px;vertical-align:middle;">
+                <img id="site-logo" src="img/logo.png" alt="Dawson Institute logo" loading="lazy">
                 <h1>Dawson Institute for Advanced Physics</h1>
             </div>
             <nav>
@@ -35,12 +69,7 @@
         <section id="mission" class="mission-section">
             <div class="container">
                 <h2>Our Mission</h2>
-                <!-- Give script a stable target to replace -->
-                <p id="mission-intro" class="mission-intro">Loading mission statement...</p>
-                
-                <div id="roadmap-container">
-                    <div class="loading">Loading mission roadmap...</div>
-                </div>
+                <p id="mission-intro" class="mission-intro">The Dawson Institute is committed to advancing fundamental physics through rigorous research, collaborative science, and responsible application of new technologies to benefit society.</p>               
             </div>
         </section>
 
@@ -80,7 +109,5 @@
             <p>&copy; 2025 Dawson Institute for Advanced Physics. All rights reserved.</p>
         </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
