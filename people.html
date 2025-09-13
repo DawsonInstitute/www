@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>People — Dawson Institute for Advanced Physics</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="People at the Dawson Institute for Advanced Physics. Meet our founder and principal investigator.">
+</head>
+<body>
+  <div id="site-header" data-src="header.html" aria-hidden="true"></div>
+
+  <main>
+    <section id="people" class="people-section">
+      <div class="container">
+        <h1>People</h1>
+        <p>This page lists researchers, staff, and contributors associated with the Dawson Institute. It's currently a small, growing list — it will expand as the Institute grows.</p>
+
+        <h2>Founder</h2>
+        <div class="person">
+          <h3>Ryan Sherrington</h3>
+          <p><em>Founder and Principal Investigator</em></p>
+          <p>ORCID: <a href="https://orcid.org/0009-0005-6631-7603" target="_blank" rel="noopener">0009-0005-6631-7603</a></p>
+          <p>Role: Leads the Institute's research program and coordinates collaborations.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Dawson Institute for Advanced Physics.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var container = document.getElementById('site-header');
+      if (!container) return;
+      var src = container.getAttribute('data-src') || 'header.html';
+
+      var fallbackHTML = '\n          <header>\n            <div class="container">\n              <div class="brand">\n                <img id="site-logo" src="img/logo.png" alt="Dawson Institute for Advanced Physics logo" loading="lazy">\n                <h1>Dawson Institute for Advanced Physics</h1>\n              </div>\n              <nav>\n                <ul>\n                  <li><a href="index.html" aria-label="Go to Home page">Home</a></li>\n                  <li><a href="index.html#mission" aria-label="Learn about our Mission">Mission</a></li>\n                  <li><a href="index.html#research" aria-label="Explore our Research areas">Research</a></li>\n                  <li><a href="people.html" aria-label="Meet our People">People</a></li>\n                  <li><a href="index.html#contact" aria-label="Contact the Dawson Institute">Contact</a></li>\n                  <li><a href="membership.html" aria-label="Membership and Join form">Membership / Join</a></li>\n                </ul>\n              </nav>\n            </div>\n          </header>';
+
+      function markCurrent(containerBase){
+        try {
+          var current = (location.pathname.split('/').pop() || 'index.html');
+          var anchors = containerBase.querySelectorAll('nav a[href]');
+          anchors.forEach(function(a){
+            var href = a.getAttribute('href');
+            if (!href) return;
+            if (current === '' && (href === 'index.html' || href === './' || href === '/')) {
+              a.setAttribute('aria-current','page');
+            } else if (href === current) {
+              a.setAttribute('aria-current','page');
+            } else {
+              a.removeAttribute('aria-current');
+            }
+          });
+        } catch(e){}
+      }
+
+      function updateHeaderHeight() {
+        try {
+          var hdr = container.querySelector('header') || document.querySelector('header');
+          var main = document.querySelector('main');
+          var h = hdr ? (hdr.getBoundingClientRect().height || hdr.offsetHeight || 0) : 0;
+          var gap = 8;
+          document.documentElement.style.setProperty('--header-height', Math.ceil(h) + 'px');
+          if (main) main.style.marginTop = (Math.ceil(h) + gap) + 'px';
+        } catch (e) { /* noop */ }
+      }
+
+      fetch(src).then(function(r){
+        if (!r.ok) throw new Error('fetch failed');
+        return r.text();
+      }).then(function(html){
+        container.innerHTML = html;
+        container.removeAttribute('aria-hidden');
+        markCurrent(container);
+        updateHeaderHeight();
+      }).catch(function(){
+        container.innerHTML = fallbackHTML;
+        container.removeAttribute('aria-hidden');
+        markCurrent(container);
+        updateHeaderHeight();
+      });
+
+      var resizeTimer;
+      window.addEventListener('resize', function(){
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(updateHeaderHeight, 120);
+      });
+
+    })();
+  </script>
+</body>
+</html>

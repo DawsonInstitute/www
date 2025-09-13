@@ -12,58 +12,6 @@
     <meta property="og:type" content="website">
     <title>Dawson Institute for Advanced Physics</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-      /* Force readable colors regardless of existing stylesheet */
-     :root{ --header-height: 0px; } /* updated dynamically by script */
-     /* ensure anchor jumps offset the header */
-     section { scroll-margin-top: calc(var(--header-height) + 8px); }
-
-    /* tiny extra space so the home section top isn't visually cut off by the header */
-    #home { padding-top: 12px !important; }
-
-      body {
-        color: #111 !important;
-        background: #fafafa !important;
-      }
-      h1,h2,h3 { color: #111 !important; }
-      p, li, a { color: #111 !important; }
-      nav a { color: #0b6efd !important; text-decoration: none; }
-      .brand h1 { color: inherit; }
-      .loading { color: #666 !important; }
-
-      /* new: explicit style for the hero heading to ensure a non-yellow foreground */
-      /* enforce a readable accent for the specific hero H2 (not yellow) */
-      h2.hero-title,
-      h2.hero-title::before,
-      h2.hero-title::after,
-      h2.hero-title * {
-        color: #0b6efd !important;               /* clear blue accent */
-        -webkit-text-fill-color: #0b6efd !important;
-        fill: #0b6efd !important;
-      }
-
-      /* changed: make logo larger and improve header typography/layout */
-      .brand{ display:flex; align-items:center; gap:12px; }
-      #site-logo{
-        height:96px;
-        width:auto;
-        display:block;
-      }
-      .brand h1{
-        font-size:1.5rem;
-        margin:0;
-      }
-      nav a{
-        font-size:0.95rem;
-        font-weight:600;
-      }
-
-      /* added: top bar background color and subtle separation */
-      header{
-        background: #fcfcfc;
-        border-bottom: 1px solid rgba(0,0,0,0.06);
-      }
-    </style>
 </head>
 <body>
     <!-- shared header will be loaded here -->
@@ -87,6 +35,7 @@
                   <li><a href="index.html" aria-label="Go to Home page">Home</a></li>
                   <li><a href="index.html#mission" aria-label="Learn about our Mission">Mission</a></li>
                   <li><a href="index.html#research" aria-label="Explore our Research areas">Research</a></li>
+                  <li><a href="people.html" aria-label="Meet our People">People</a></li>
                   <li><a href="index.html#contact" aria-label="Contact the Dawson Institute">Contact</a></li>
                   <li><a href="membership.html" aria-label="Membership and Join form">Membership / Join</a></li>
                 </ul>
@@ -162,7 +111,8 @@
         <section id="mission" class="mission-section">
             <div class="container">
                 <h2>Our Mission</h2>
-                <p id="mission-intro" class="mission-intro">The Dawson Institute is committed to advancing fundamental physics through rigorous research, collaborative science, and responsible application of new technologies to benefit society. This work is currently a solo research effort; collaboration inquiries are welcome.</p>               
+        <p id="mission-intro" class="mission-intro">The Dawson Institute is committed to advancing fundamental physics through rigorous research, open and collaborative science, and the responsible application of new technologies to benefit society. Our scope is intentionally broad to support growth across energy sciences, spacetime and quantum field theory, computational physics, materials science, and related interdisciplinary areas. Current work is led by the founder; collaborations and inquiries are welcome.</p>
+        <p class="links">Explore our outputs on <a href="https://github.com/DawsonInstitute" target="_blank" rel="noopener">GitHub</a> and our curated publications and datasets at the Dawson Institute community on <a href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Zenodo</a>.</p>
             </div>
         </section>
 
@@ -184,11 +134,35 @@
                     </div>
                     <div class="research-item">
                         <h3>Explore Our Work</h3>
-                        <p>View our open-source projects on <a href="https://github.com/DawsonInstitute/" target="_blank" rel="noopener">GitHub</a>. Follow our publications and datasets on <a href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Zenodo</a>.</p>
+            <p>View our open-source projects on <a href="https://github.com/DawsonInstitute/" target="_blank" rel="noopener">GitHub</a>. Follow our publications and datasets on <a href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Zenodo</a>.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+    <section id="outputs" class="outputs-section">
+      <div class="container">
+        <h2>Publications &amp; Software</h2>
+        <p>We publish preprints, release software repositories, and share datasets openly when possible. Below are links to our main discovery hubs and a short list of representative outputs.</p>
+        <ul class="outputs-list">
+          <li><strong>Zenodo community:</strong> <a href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Dawson Institute on Zenodo</a> — publications, preprints, and datasets.</li>
+          <li><strong>GitHub organization:</strong> <a href="https://github.com/DawsonInstitute" target="_blank" rel="noopener">github.com/DawsonInstitute</a> — code, tools, and reproducible workflows.</li>
+              <li><strong>Representative repositories and outputs:</strong>
+                <ul>
+                  <li>Repo: <a href="https://github.com/DawsonInstitute/hts-coils" target="_blank" rel="noopener">hts-coils</a> — high-temperature superconductor coil designs and simulation tools (GitHub).</li>
+                </ul>
+              </li>
+        </ul>
+        <p>If you'd like specific publications or repos listed here, send the citations or links and I will add them.</p>
+      </div>
+    </section>
+
+    <section id="governance" class="governance-section">
+      <div class="container">
+        <h2>Governance &amp; Membership (Placeholder)</h2>
+        <p>The Dawson Institute is an independent research body with a planned governance and membership structure. Formal bylaws and membership tiers will be published in future.</p>
+      </div>
+    </section>
 
         <section id="contact" class="contact-section">
             <div class="container">

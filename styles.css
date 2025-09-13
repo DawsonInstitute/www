@@ -356,3 +356,71 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* --- Styles moved from inline <style> in index.html --- */
+:root { --header-height: 0px; }
+
+/* ensure anchor jumps offset the header */
+section { scroll-margin-top: calc(var(--header-height) + 8px); }
+
+/* tiny extra space so the home section top isn't visually cut off by the header */
+#home { padding-top: 12px !important; }
+
+body {
+  color: #111 !important;
+  background: #fafafa !important;
+}
+
+h1,h2,h3 { color: #111 !important; }
+p, li, a { color: #111 !important; }
+nav a { color: #0b6efd !important; text-decoration: none; }
+.brand h1 { color: inherit; }
+.loading { color: #666 !important; }
+
+/* explicit style for the hero heading to ensure a non-yellow foreground */
+h2.hero-title,
+h2.hero-title::before,
+h2.hero-title::after,
+h2.hero-title * {
+  color: #0b6efd !important;
+  -webkit-text-fill-color: #0b6efd !important;
+  fill: #0b6efd !important;
+}
+
+/* header / brand tweaks */
+.brand{ display:flex; align-items:center; gap:12px; }
+#site-logo{ height:96px; width:auto; display:block; }
+.brand h1{ font-size:1.5rem; margin:0; }
+nav a{ font-size:0.95rem; font-weight:600; }
+
+/* subtle header background */
+header{ background: #fcfcfc; border-bottom: 1px solid rgba(0,0,0,0.06); }
+
+/* End moved styles */
+
+/* People page styles */
+.people-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    margin: 0 20px 2rem 20px;
+    padding: 2rem 0;
+    color: #333;
+}
+
+.people-section .person {
+    background: #fff;
+    border: 1px solid #e6e9ef;
+    border-radius: 10px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    margin: 1rem 0;
+}
+
+.people-section .person h3 {
+    color: #1e3c72;
+    margin-bottom: 0.25rem;
+}
+
+.people-section .person p em { font-style: italic; color: #444; }
+
+pre { background: #f8f9fa; padding: 1rem; border-radius: 6px; overflow:auto; }
