@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dawson Institute for Advanced Physics conducts pioneering research in quantum field theory, computational physics, and exotic materials for breakthrough technologies.">
-    <meta name="keywords" content="advanced physics, quantum field theory, computational physics, plasma reactors, exotic materials, Dawson Institute">
-    <meta property="og:title" content="Dawson Institute for Advanced Physics">
-    <meta property="og:description" content="Pioneering research in quantum field theory, computational physics, and exotic materials.">
-    <meta property="og:image" content="https://www.dawsoninstitute.org/img/logo.png">
-    <meta property="og:url" content="https://www.dawsoninstitute.org">
-    <meta property="og:type" content="website">
-    <title>Dawson Institute for Advanced Physics</title>
-    <link rel="stylesheet" href="styles.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6EGRKZSPKV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-6EGRKZSPKV');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Dawson Institute for Advanced Physics conducts pioneering research in quantum field theory, computational physics, and exotic materials for breakthrough technologies.">
+  <meta name="keywords"
+    content="advanced physics, quantum field theory, computational physics, plasma reactors, exotic materials, Dawson Institute">
+  <meta property="og:title" content="Dawson Institute for Advanced Physics">
+  <meta property="og:description"
+    content="Pioneering research in quantum field theory, computational physics, and exotic materials.">
+  <meta property="og:image" content="https://www.dawsoninstitute.org/img/logo.png">
+  <meta property="og:url" content="https://www.dawsoninstitute.org">
+  <meta property="og:type" content="website">
+  <title>Dawson Institute for Advanced Physics</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- shared header will be loaded here -->
-    <div id="site-header" data-src="header.html" aria-hidden="true"></div>
+  <!-- shared header will be loaded here -->
+  <div id="site-header" data-src="header.html" aria-hidden="true"></div>
 
-    <script>
-      (function(){
-        var container = document.getElementById('site-header');
-        if (!container) return;
-        var src = container.getAttribute('data-src') || 'header.html';
+  <script>
+    (function () {
+      var container = document.getElementById('site-header');
+      if (!container) return;
+      var src = container.getAttribute('data-src') || 'header.html';
 
-        var fallbackHTML = `
+      var fallbackHTML = `
           <header>
             <div class="container">
               <div class="brand">
@@ -43,193 +57,211 @@
             </div>
           </header>`;
 
-        function markCurrent(containerBase){
-          try {
-            var current = (location.pathname.split('/').pop() || 'index.html');
-            var anchors = containerBase.querySelectorAll('nav a[href]');
-            anchors.forEach(function(a){
-              var href = a.getAttribute('href');
-              if (!href) return;
-              // mark index.html as current when on root or index
-              if (current === '' && (href === 'index.html' || href === './' || href === '/')) {
-                a.setAttribute('aria-current','page');
-              } else if (href === current) {
-                a.setAttribute('aria-current','page');
-              } else {
-                a.removeAttribute('aria-current');
-              }
-            });
-          } catch(e){}
-        }
+      function markCurrent(containerBase) {
+        try {
+          var current = (location.pathname.split('/').pop() || 'index.html');
+          var anchors = containerBase.querySelectorAll('nav a[href]');
+          anchors.forEach(function (a) {
+            var href = a.getAttribute('href');
+            if (!href) return;
+            // mark index.html as current when on root or index
+            if (current === '' && (href === 'index.html' || href === './' || href === '/')) {
+              a.setAttribute('aria-current', 'page');
+            } else if (href === current) {
+              a.setAttribute('aria-current', 'page');
+            } else {
+              a.removeAttribute('aria-current');
+            }
+          });
+        } catch (e) { }
+      }
 
-        // set CSS var --header-height and also push <main> down so header never overlaps content
-        function updateHeaderHeight() {
-          try {
-            var hdr = container.querySelector('header') || document.querySelector('header');
-            var main = document.querySelector('main');
-            var h = hdr ? (hdr.getBoundingClientRect().height || hdr.offsetHeight || 0) : 0;
-            var gap = 8; // keeps a small visual gap so rounded corners remain visible
-            document.documentElement.style.setProperty('--header-height', Math.ceil(h) + 'px');
-            if (main) main.style.marginTop = (Math.ceil(h) + gap) + 'px';
-          } catch (e) { /* noop */ }
-        }
+      // set CSS var --header-height and also push <main> down so header never overlaps content
+      function updateHeaderHeight() {
+        try {
+          var hdr = container.querySelector('header') || document.querySelector('header');
+          var main = document.querySelector('main');
+          var h = hdr ? (hdr.getBoundingClientRect().height || hdr.offsetHeight || 0) : 0;
+          var gap = 8; // keeps a small visual gap so rounded corners remain visible
+          document.documentElement.style.setProperty('--header-height', Math.ceil(h) + 'px');
+          if (main) main.style.marginTop = (Math.ceil(h) + gap) + 'px';
+        } catch (e) { /* noop */ }
+      }
 
-        fetch(src).then(function(r){
-          if (!r.ok) throw new Error('fetch failed');
-          return r.text();
-        }).then(function(html){
-          container.innerHTML = html;
-          container.removeAttribute('aria-hidden');
-          markCurrent(container);
-          updateHeaderHeight();
-        }).catch(function(){
-          // fallback to inline header so header is visible when fetch isn't allowed
-          container.innerHTML = fallbackHTML;
-          container.removeAttribute('aria-hidden');
-          markCurrent(container);
-          updateHeaderHeight();
-        });
+      fetch(src).then(function (r) {
+        if (!r.ok) throw new Error('fetch failed');
+        return r.text();
+      }).then(function (html) {
+        container.innerHTML = html;
+        container.removeAttribute('aria-hidden');
+        markCurrent(container);
+        updateHeaderHeight();
+      }).catch(function () {
+        // fallback to inline header so header is visible when fetch isn't allowed
+        container.innerHTML = fallbackHTML;
+        container.removeAttribute('aria-hidden');
+        markCurrent(container);
+        updateHeaderHeight();
+      });
 
-        // update header height on resize (throttled)
-        var resizeTimer;
-        window.addEventListener('resize', function(){
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(updateHeaderHeight, 120);
-        });
+      // update header height on resize (throttled)
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(updateHeaderHeight, 120);
+      });
 
-      })();
-    </script>
+    })();
+  </script>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="container">
-                <h2 class="hero-title">Advancing the Frontiers of Physics</h2>
-                <p>Pioneering research in advanced physics with a focus on breakthrough technologies.</p>
-            </div>
-        </section>
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <h2 class="hero-title">Advancing the Frontiers of Physics</h2>
+        <p>Pioneering research in advanced physics with a focus on breakthrough technologies.</p>
+      </div>
+    </section>
 
-        <section id="mission" class="mission-section">
-            <div class="container">
-                <h2>Our Mission</h2>
-        <p id="mission-intro" class="mission-intro">The Dawson Institute is committed to advancing fundamental physics through rigorous research, open and collaborative science, and the responsible application of new technologies to benefit society. Our scope is intentionally broad to support growth across energy sciences, spacetime and quantum field theory, computational physics, materials science, and related interdisciplinary areas. Current work is led by the founder; collaborations and inquiries are welcome.</p>
-        <p class="links">Explore our outputs on <a href="https://github.com/DawsonInstitute" target="_blank" rel="noopener">GitHub</a> and our curated publications and datasets at the Dawson Institute community on <a href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Zenodo</a>.</p>
-            </div>
-        </section>
+    <section id="mission" class="mission-section">
+      <div class="container">
+        <h2>Our Mission</h2>
+        <p id="mission-intro" class="mission-intro">The Dawson Institute is committed to advancing fundamental physics
+          through rigorous research, open and collaborative science, and the responsible application of new technologies
+          to benefit society. Our scope is intentionally broad to support growth across energy sciences, spacetime and
+          quantum field theory, computational physics, materials science, and related interdisciplinary areas. Current
+          work is led by the founder; collaborations and inquiries are welcome.</p>
+        <p class="links">Explore our outputs on <a href="https://github.com/DawsonInstitute" target="_blank"
+            rel="noopener">GitHub</a> and our curated publications and datasets at the Dawson Institute community on <a
+            href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Zenodo</a>.</p>
+      </div>
+    </section>
 
-        <section id="research" class="research-section">
-            <div class="container">
-                <h2>Current Research Areas</h2>
-                <div class="research-grid">
-                    <div class="research-item">
-                        <h3>Quantum Field Theory</h3>
-                        <p>Exploring quantum mechanical approaches to space-time manipulation.</p>
-                    </div>
-                    <div class="research-item">
-                        <h3>Computational Physics</h3>
-                        <p>Applying advanced simulation and computation to model complex physical systems.</p>
-                    </div>
-                    <div class="research-item">
-                        <h3>Materials Science</h3>
-                        <p>Creating exotic materials capable of withstanding extreme conditions.</p>
-                    </div>
-                    <div class="research-item">
-                        <h3>Explore Our Work</h3>
-            <p>View our open-source projects on <a href="https://github.com/DawsonInstitute/" target="_blank" rel="noopener">GitHub</a>. Follow our publications and datasets on <a href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Zenodo</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section id="research" class="research-section">
+      <div class="container">
+        <h2>Current Research Areas</h2>
+        <div class="research-grid">
+          <div class="research-item">
+            <h3>Quantum Field Theory</h3>
+            <p>Exploring quantum mechanical approaches to space-time manipulation.</p>
+          </div>
+          <div class="research-item">
+            <h3>Computational Physics</h3>
+            <p>Applying advanced simulation and computation to model complex physical systems.</p>
+          </div>
+          <div class="research-item">
+            <h3>Materials Science</h3>
+            <p>Creating exotic materials capable of withstanding extreme conditions.</p>
+          </div>
+          <div class="research-item">
+            <h3>Explore Our Work</h3>
+            <p>View our open-source projects on <a href="https://github.com/DawsonInstitute/" target="_blank"
+                rel="noopener">GitHub</a>. Follow our publications and datasets on <a
+                href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Zenodo</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="outputs" class="outputs-section">
       <div class="container">
         <h2>Publications &amp; Software</h2>
-        <p>We publish preprints, release software repositories, and share datasets openly when possible. Below are links to our main discovery hubs and a short list of representative outputs.</p>
+        <p>We publish preprints, release software repositories, and share datasets openly when possible. Below are links
+          to our main discovery hubs and a short list of representative outputs.</p>
         <ul class="outputs-list">
-          <li><strong>Zenodo community:</strong> <a href="https://zenodo.org/communities/dawsoninstitute" target="_blank" rel="noopener">Dawson Institute on Zenodo</a> — publications, preprints, and datasets.</li>
-          <li><strong>GitHub organization:</strong> <a href="https://github.com/DawsonInstitute" target="_blank" rel="noopener">github.com/DawsonInstitute</a> — code, tools, and reproducible workflows.</li>
-              <li><strong>Representative repositories and outputs:</strong>
-                <ul>
-                  <li>Repo: <a href="https://github.com/DawsonInstitute/hts-coils" target="_blank" rel="noopener">hts-coils</a> — high-temperature superconductor coil designs and simulation tools (GitHub).</li>
-                </ul>
-              </li>
+          <li><strong>Zenodo community:</strong> <a href="https://zenodo.org/communities/dawsoninstitute"
+              target="_blank" rel="noopener">Dawson Institute on Zenodo</a> — publications, preprints, and datasets.
+          </li>
+          <li><strong>GitHub organization:</strong> <a href="https://github.com/DawsonInstitute" target="_blank"
+              rel="noopener">github.com/DawsonInstitute</a> — code, tools, and reproducible workflows.</li>
+          <li><strong>Representative repositories and outputs:</strong>
+            <ul>
+              <li>Repo: <a href="https://github.com/DawsonInstitute/hts-coils" target="_blank"
+                  rel="noopener">hts-coils</a> — high-temperature superconductor coil designs and simulation tools
+                (GitHub).</li>
+            </ul>
+          </li>
         </ul>
-        <p>If you'd like specific publications or repos listed here, send the citations or links and I will add them.</p>
+        <p>If you'd like specific publications or repos listed here, send the citations or links and I will add them.
+        </p>
       </div>
     </section>
 
     <section id="governance" class="governance-section">
       <div class="container">
         <h2>Governance &amp; Membership (Placeholder)</h2>
-        <p>The Dawson Institute is an independent research body with a planned governance and membership structure. Formal bylaws and membership tiers will be published in future.</p>
+        <p>The Dawson Institute is an independent research body with a planned governance and membership structure.
+          Formal bylaws and membership tiers will be published in future.</p>
       </div>
     </section>
 
-        <section id="contact" class="contact-section">
-            <div class="container">
-                <h2>Contact Us</h2>
-                <p>Interested in our research? Get in touch.</p>
-                <div class="contact-info">
-                    <!-- obfuscated email (stored reversed in data-e) -->                    
-                    <p>Email: <span id="email-contact" data-e="gro.etutitsninoswad@ofni" aria-hidden="true">[email protected]</span></p>
-                    <!-- CTA without raw mailto; script will set href and handle click -->
-                    <a id="contact-button" class="cta-button" href="#" data-e="gro.etutitsninoswad@ofni">Get in Touch</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Dawson Institute for Advanced Physics. All rights reserved.</p>
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p>Interested in our research? Get in touch.</p>
+        <div class="contact-info">
+          <!-- obfuscated email (stored reversed in data-e) -->
+          <p>Email: <span id="email-contact" data-e="gro.etutitsninoswad@ofni" aria-hidden="true">[email
+              protected]</span></p>
+          <!-- CTA without raw mailto; script will set href and handle click -->
+          <a id="contact-button" class="cta-button" href="#" data-e="gro.etutitsninoswad@ofni">Get in Touch</a>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <!-- unobtrusive script to reconstruct obfuscated email and reliably open mail client -->
-    <script>
-      (function(){
-        function unobfuscate(rev){ return String(rev || '').split('').reverse().join(''); }
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Dawson Institute for Advanced Physics. All rights reserved.</p>
+    </div>
+  </footer>
 
-        function revealAndOpen(rev, openMail){
-          var email = unobfuscate(rev);
-          var el = document.getElementById('email-contact');
-          var btn = document.getElementById('contact-button');
-          if (el) {
-            el.textContent = email;
-            el.setAttribute('aria-label', 'Email ' + email);
-            el.removeAttribute('aria-hidden');
-          }
-          if (btn) {
-            btn.setAttribute('aria-label', 'Email ' + email);
-            // set href for progressive enhancement
-            try { btn.href = 'mailto:' + email; } catch(e) {}
-            if (openMail) {
-              // ensure mail client opens even if href isn't parsed yet
-              window.location.href = 'mailto:' + email;
-            }
+  <!-- unobtrusive script to reconstruct obfuscated email and reliably open mail client -->
+  <script>
+    (function () {
+      function unobfuscate(rev) { return String(rev || '').split('').reverse().join(''); }
+
+      function revealAndOpen(rev, openMail) {
+        var email = unobfuscate(rev);
+        var el = document.getElementById('email-contact');
+        var btn = document.getElementById('contact-button');
+        if (el) {
+          el.textContent = email;
+          el.setAttribute('aria-label', 'Email ' + email);
+          el.removeAttribute('aria-hidden');
+        }
+        if (btn) {
+          btn.setAttribute('aria-label', 'Email ' + email);
+          // set href for progressive enhancement
+          try { btn.href = 'mailto:' + email; } catch (e) { }
+          if (openMail) {
+            // ensure mail client opens even if href isn't parsed yet
+            window.location.href = 'mailto:' + email;
           }
         }
+      }
 
-        // On DOM ready, reveal email (no automatic mail open)
-        document.addEventListener('DOMContentLoaded', function(){
-          var el = document.getElementById('email-contact');
-          var btn = document.getElementById('contact-button');
-          var rev = (el && el.getAttribute('data-e')) || (btn && btn.getAttribute('data-e')) || '';
-          if (!rev) return;
-          revealAndOpen(rev, false);
-        });
+      // On DOM ready, reveal email (no automatic mail open)
+      document.addEventListener('DOMContentLoaded', function () {
+        var el = document.getElementById('email-contact');
+        var btn = document.getElementById('contact-button');
+        var rev = (el && el.getAttribute('data-e')) || (btn && btn.getAttribute('data-e')) || '';
+        if (!rev) return;
+        revealAndOpen(rev, false);
+      });
 
-        // Fallback: handle clicks even if DOMContentLoaded hasn't completed or JS runs late
-        document.addEventListener('click', function(e){
-          var t = e.target;
-          if (!t) return;
-          var btn = t.closest && t.closest('#contact-button') || (t.id === 'contact-button' && t);
-          if (!btn) return;
-          e.preventDefault();
-          var rev = btn.getAttribute('data-e') || (document.getElementById('email-contact') && document.getElementById('email-contact').getAttribute('data-e')) || '';
-          if (!rev) return;
-          revealAndOpen(rev, true);
-        }, true);
-      })();
-    </script>
+      // Fallback: handle clicks even if DOMContentLoaded hasn't completed or JS runs late
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (!t) return;
+        var btn = t.closest && t.closest('#contact-button') || (t.id === 'contact-button' && t);
+        if (!btn) return;
+        e.preventDefault();
+        var rev = btn.getAttribute('data-e') || (document.getElementById('email-contact') && document.getElementById('email-contact').getAttribute('data-e')) || '';
+        if (!rev) return;
+        revealAndOpen(rev, true);
+      }, true);
+    })();
+  </script>
 </body>
+
 </html>
