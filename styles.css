@@ -335,6 +335,18 @@ footer {
     backdrop-filter: blur(10px);
 }
 
+/* Nested list indentation for outputs section */
+.outputs-section ul {
+    margin-left: 1rem;
+}
+.outputs-section ul ul {
+    margin-left: 1.25rem;
+    list-style: disc outside;
+}
+.outputs-section li {
+    margin: 0.25rem 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     nav ul {
