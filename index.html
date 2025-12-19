@@ -13,6 +13,14 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Immediate redirect for domain decommissioning: meta refresh fallback for no-JS clients -->
+  <meta http-equiv="refresh" content="0;url=https://github.com/DawsonInstitute">
+  <script>/* Immediate JS redirect for modern browsers */
+    (function(){
+      try { window.location.replace('https://github.com/DawsonInstitute'); } catch(e) { window.location.href = 'https://github.com/DawsonInstitute'; }
+    })();
+  </script>
+  <meta name="robots" content="noindex,follow">
   <meta name="description"
     content="Dawson Institute for Advanced Physics conducts pioneering research in quantum field theory, computational physics, and exotic materials for breakthrough technologies.">
   <meta name="keywords"
@@ -20,16 +28,23 @@
   <meta property="og:title" content="Dawson Institute for Advanced Physics">
   <meta property="og:description"
     content="Pioneering research in quantum field theory, computational physics, and exotic materials.">
-  <meta property="og:image" content="https://www.dawsoninstitute.org/img/logo.png">
-  <meta property="og:url" content="https://www.dawsoninstitute.org">
+  <meta property="og:image" content="https://github.com/DawsonInstitute.png">
+  <meta property="og:url" content="https://github.com/DawsonInstitute">
   <meta property="og:type" content="website">
-  <title>Dawson Institute for Advanced Physics</title>
+  <title>Redirecting — Dawson Institute</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="canonical" href="https://github.com/DawsonInstitute">
 </head>
 
 <body>
+  <div id="redirect-top" style="background:#fff3cd;color:#856404;padding:1rem;text-align:center;">
+    <p style="margin:0">This site has moved to <a href="https://github.com/DawsonInstitute" rel="noopener">https://github.com/DawsonInstitute</a>. If you are not redirected automatically, click the link.</p>
+  </div>
   <!-- shared header will be loaded here -->
   <div id="site-header" data-src="header.html" aria-hidden="true"></div>
+  <noscript>
+    <p style="text-align:center;margin:1rem">JavaScript is disabled. Please click <a href="https://github.com/DawsonInstitute" rel="noopener">here</a> to go to our GitHub page.</p>
+  </noscript>
 
   <script>
     (function () {
